@@ -13,16 +13,9 @@
   <header>
     <h1>Recipe Browser</h1>
   </header>
-  
-  <select
-		bind:value={selectedCategory}	>
-		{#each categories as category}
-			<option value={category}> {category} </option>
-		{/each}
-	</select>
-  
+    
   <CategorySelector 
-    {categories} 
+    {categories}
     bind:selectedCategory 
   />
   
@@ -30,3 +23,26 @@
     {recipes} 
   />
 </main>
+
+<style>
+  header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  h1 {
+    color: #23a45b;
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  main {
+    padding: 2rem 1rem;
+  }
+
+  @media (min-width: 768px) {
+    main {
+      padding: 2rem;
+    }
+  }
+</style>

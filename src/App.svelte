@@ -11,7 +11,7 @@
 
 <main>
   <header>
-    <h1>Recipe Browser</h1>
+    <h1>Pokemon Recipe Browser</h1>
   </header>
     
   <CategorySelector 
@@ -28,12 +28,6 @@
   header {
     text-align: center;
     margin-bottom: 3rem;
-  }
-
-  h1 {
-    color: #23a45b;
-    font-size: 2.5rem;
-    margin-bottom: 0.5rem;
   }
 
   main {

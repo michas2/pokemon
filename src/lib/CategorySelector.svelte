@@ -21,6 +21,8 @@
     background: #f0f2f5;
     padding: 0.5rem;
     border-radius: 8px;
+    margin-right: 20%;
+    margin-left: 20%;
   }
 
   button {

@@ -5,7 +5,10 @@
   import CategorySelector from './lib/CategorySelector.svelte';
 
   const categories: string[] = Object.keys(book) as string[];
-  let selectedCategory: string = $state(categories[0])
+  
+  let selectedCategory: string = $state( localStorage.getItem("category") || categories[0]);
+  $effect(() => localStorage.setItem("category", selectedCategory));
+  
   let recipes: Recipes = $derived(book[selectedCategory]);
 </script>
 
@@ -28,7 +31,11 @@
   header {
     text-align: center;
     margin-bottom: 3rem;
+    background-color: antiquewhite;
+    border-radius: 15px;
+    margin: 10%;
   }
+
 
   main {
     padding: 2rem 1rem;

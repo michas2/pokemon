@@ -2,6 +2,7 @@
   import { type Recipes, type Ingredients } from "../data/recipes";
   import { getAllIngredients, getTotalIngredients } from "./helpers";
   import { trapFocus } from "./actions.svelte";
+  import { fly } from 'svelte/transition';
 
   let { recipes }: { recipes: Recipes } = $props();
 
@@ -45,13 +46,16 @@
       )
       .sort((a, b) => a.totalIngredients - b.totalIngredients),
   );
+  function eat(name: string) {
+    let ingredients=sortedRecipes.filter((n) => n.name === name)[0].ingredients;
+    Object.entries(ingredients).forEach(([ingredient, amount]) => owned[ingredient] -= amount )
+  }
 </script>
 
-<table><thead><tr>
-  <th class="exclude">removed:</th>
+<table class="exclude"><thead><tr>
   {#each exclude as ingredient}
-  <th class="exclude" onclick={() => (exclude = exclude.filter((i) => i !== ingredient))}>
-    <ImageTooltip name={ingredient} type="ingredient" />
+  <th transition:fly={{ y: 100,x:100, duration: 1000 }} class="exclude" onclick={() => (exclude = exclude.filter((i) => i !== ingredient))}>
+    <ImageTooltip  name={ingredient} type="ingredient" />
   </th>
   {/each}
 </tr></thead></table>
@@ -98,7 +102,7 @@
               big: totalIngredients > owned["total"],
             }}
           >
-            <ImageTooltip {name} type="meal" />
+            <ImageTooltip click={()=>eat(name)} {name} type="meal" />
           </td>
           {#each sortedIngredients as ingredient}
             <td
@@ -124,12 +128,14 @@
 
   th.exclude {
     width: 30px;
+    border-radius: 15px;
   }
   .table-container {
     overflow-x: auto;
     margin: 1rem 0;
     border-radius: 12px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background: #f0f2f5;
   }
 
   table.recipe-table {
@@ -141,7 +147,7 @@
     border: 1px solid rgb(255, 255, 255);
     padding: 0.1rem;
     text-align: center;
-    min-width: 30px;
+    min-width: 20px;
   }
 
   th {
@@ -159,7 +165,7 @@
 
   .limit-input {
     width: 20px;
-    padding: 0.15rem;
+    padding: 0;
     border: 1px solid #ddd;
     border-radius: 4px;
     text-align: center;
@@ -182,8 +188,8 @@
     border: 1px solid rgb(255, 255, 255);
     padding: 0.1rem;
     text-align: center;
-    min-width: 30px;
-    font-size: 0.9rem;
+    min-width: 20px;
+    font-size: 0.8rem;
   }
 
   td.enough {

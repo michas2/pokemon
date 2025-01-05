@@ -11,7 +11,7 @@
 
 <main>
   <header>
-    <h1>Pokemon Recipe Browser</h1>
+    <h1>Pokemon Recipe Calculator</h1>
   </header>
     
   <CategorySelector 

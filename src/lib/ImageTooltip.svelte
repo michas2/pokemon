@@ -1,17 +1,15 @@
 <script lang="ts">
-    let { name, type }: { name: string; type: "ingredient" | "meal" } = $props();
+    let { name, type, click = null }  = $props();
     let imageUrl = $derived( `https://www.serebii.net/pokemonsleep/${type}s/${name.toLowerCase().replace(/\s+/g, "")}.png` );
     let tooltipVisible = $state(false);
 </script>
 
 <div class="image-tooltip">
-    <img
-        src={imageUrl}
-        alt={name}
-        class="icon"
-        onmouseenter={() => tooltipVisible = true}
-        onmouseleave={() => tooltipVisible = false}
-    />
+    <!-- svelte-ignore a11y_no_noninteractive_element_interactions, a11y_click_events_have_key_events -->
+    <img  src={imageUrl} alt={name} class="icon"
+    onclick={click}
+    onmouseenter={() => tooltipVisible = true}
+    onmouseleave={() => tooltipVisible = false} />
     {#if tooltipVisible}
         <div class="tooltip">
             <img src={imageUrl} alt={name} class="preview" />

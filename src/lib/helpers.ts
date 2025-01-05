@@ -1,19 +1,23 @@
 import type { Recipes } from "../data/recipes";
 
-const order: string[] = [
-  "Fancy Apple",
+const order: string[] =  [
+  "Large Leek",
+  "Tasty Mushroom",
+  "Fancy Egg",
   "Soft Potato",
+  "Fancy Apple",
+  "Fiery Herb",
+  "Bean Sausage",
+  "Moomoo Milk",
+  "Honey",
+  "Pure Oil",
+  "Warming Ginger",
   "Snoozy Tomato",
   "Soothing Cacao",
-  "Moomoo Milk",
-  "Large Leek",
-  "Warming Ginger",
-  "Fiery Herb",
-  "Tasty Mushroom",
-  "Bean Sausage",
-  "Honey",
-  "Fancy Egg",
   "Slowpoke Tail",
+  "Greengrass Soybeans",
+  "Greengrass Corn",
+  "Rousing Coffee"
 ];
 
 export function getAllIngredients(recipes: Recipes): string[] {

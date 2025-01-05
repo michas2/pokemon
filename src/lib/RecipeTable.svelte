@@ -1,100 +1,127 @@
 <script lang="ts">
-  import { type Recipes, type Ingredients } from '../data/recipes';
-  import { getAllIngredients, getTotalIngredients } from './helpers';
-  import { trapFocus } from './actions.svelte';
+  import { type Recipes, type Ingredients } from "../data/recipes";
+  import { getAllIngredients, getTotalIngredients } from "./helpers";
+  import { trapFocus } from "./actions.svelte";
 
-  let {recipes}: {recipes: Recipes} = $props();
-  
-  import ImageTooltip from './ImageTooltip.svelte';
-//  import { trapFocus } from './utils/actions.svelte';
+  let { recipes }: { recipes: Recipes } = $props();
 
-  let owned: {[key: string]: number} = $state( JSON.parse(localStorage.getItem("owned")||"{}"));
-  $effect(() => localStorage.setItem("owned", JSON.stringify(owned)) );
-  $effect(() => [...sortedIngredients,"total"].forEach(i=> { if(!(i in owned)){owned[i] = 0} }));
+  import ImageTooltip from "./ImageTooltip.svelte";
 
-  let exclude: string[] = $state(JSON.parse(localStorage.getItem("exclude")||"[]"));
+  let owned: { [key: string]: number } = $state(
+    JSON.parse(localStorage.getItem("owned") || "{}"),
+  );
+  $effect(() => localStorage.setItem("owned", JSON.stringify(owned)));
+  $effect(() =>
+    [...sortedIngredients, "total"].forEach((i) => {
+      if (!(i in owned)) {
+        owned[i] = 0;
+      }
+    }),
+  );
+
+  let exclude: string[] = $state(
+    JSON.parse(localStorage.getItem("exclude") || "[]"),
+  );
   $effect(() => localStorage.setItem("exclude", JSON.stringify(exclude)));
 
-  let marked: string[] = $state(JSON.parse(localStorage.getItem("marked")||"[]"));
+  let marked: string[] = $state(
+    JSON.parse(localStorage.getItem("marked") || "[]"),
+  );
   $effect(() => localStorage.setItem("marked", JSON.stringify(marked)));
 
-  let sortedIngredients: string[] = $derived(getAllIngredients(recipes).filter(i => !exclude.includes(i)));
+  let sortedIngredients: string[] = $derived(
+    getAllIngredients(recipes).filter((i) => !exclude.includes(i)),
+  );
 
-  let sortedRecipes = $derived(Object.entries(recipes)
-    .map(([name,ingredients]) => ({ name, ingredients, totalIngredients: getTotalIngredients(ingredients)}))
-    .filter(x => Object.keys(x.ingredients).every(i => sortedIngredients.includes(i)))
-    .sort((a, b) => a.totalIngredients - b.totalIngredients));
+  let sortedRecipes = $derived(
+    Object.entries(recipes)
+      .map(([name, ingredients]) => ({
+        name,
+        ingredients,
+        totalIngredients: getTotalIngredients(ingredients),
+      }))
+      .filter((x) =>
+        Object.keys(x.ingredients).every((i) => sortedIngredients.includes(i)),
+      )
+      .sort((a, b) => a.totalIngredients - b.totalIngredients),
+  );
 </script>
 
 <table><thead><tr>
   <th class="exclude">removed:</th>
   {#each exclude as ingredient}
-  <th class="exclude" onclick={() => exclude=exclude.filter(i => i !== ingredient)}>
+  <th class="exclude" onclick={() => (exclude = exclude.filter((i) => i !== ingredient))}>
     <ImageTooltip name={ingredient} type="ingredient" />
   </th>
   {/each}
-
 </tr></thead></table>
 
 <div use:trapFocus class="table-container">
   <table class="recipe-table">
     <thead>
       <tr>
-        <th><div>Total</div>
-          <input 
-          type="number"
-          min="0"
-          bind:value={owned['total']}
-          class="limit-input"
-        />
+        <th>
+          <div class="ingredient-header">
+            <div>Total</div>
+            <input type="number" min="0" bind:value={owned["total"]} class="limit-input" />
+          </div>
         </th>
-        <th>Recipe</th>
+        <th><div class="ingredient-header">Recipe</div></th>
         {#each sortedIngredients as ingredient}
-          <th onclick={() => exclude.push(ingredient)}>
-            <div class="ingredient-header">
-              <ImageTooltip 
-                name={ingredient} type="ingredient" />
-              <input 
-                type="number"
-                min="0"
-                bind:value={owned[ingredient]} 
-                class="limit-input"
-              />
-            </div>
-          </th>
+        <th>
+          <div class="ingredient-header">
+            <ImageTooltip click={() => exclude.push(ingredient)} name={ingredient} type="ingredient" />
+            <input type="number" min="0" bind:value={owned[ingredient]} class="limit-input" />
+          </div>
+        </th>
         {/each}
       </tr>
     </thead>
     <tbody>
-      {#each sortedRecipes as { name, ingredients, totalIngredients}}
-      <tr>
-        <td>{totalIngredients}</td>
-        <td onclick={()=>{if(marked.includes(name)){marked=marked.filter(m=>m!==name)}else{marked.push(name)}}}
-         class={{
-          "dish":1,
-          highlight: marked.includes(name),
-          enough: Object.entries(ingredients).every( ([ingredient, amount]) => owned[ingredient] >= amount ),
-          big: totalIngredients > owned["total"] }} >
+      {#each sortedRecipes as { name, ingredients, totalIngredients }}
+        <tr>
+          <td>{totalIngredients}</td>
+          <td
+            onclick={() => {
+              if (marked.includes(name)) {
+                marked = marked.filter((m) => m !== name);
+              } else {
+                marked.push(name);
+              }
+            }}
+            class={{
+              dish: 1,
+              highlight: marked.includes(name),
+              enough: Object.entries(ingredients).every(
+                ([ingredient, amount]) => owned[ingredient] >= amount,
+              ),
+              big: totalIngredients > owned["total"],
+            }}
+          >
             <ImageTooltip {name} type="meal" />
-        </td>
-        {#each sortedIngredients as ingredient}
+          </td>
+          {#each sortedIngredients as ingredient}
             <td
-                class="quantity"
-                class:enough={owned[ingredient] >= ingredients[ingredient]}
-                class:missing={owned[ingredient] < ingredients[ingredient]}
+              class="quantity"
+              class:enough={owned[ingredient] >= ingredients[ingredient]}
+              class:missing={owned[ingredient] < ingredients[ingredient]}
             >
-                {#if ingredients[ingredient]}
-                    <span class="quantity">{ingredients[ingredient]}</span>
-                {/if}
+              {#if ingredients[ingredient]}
+                <span class="quantity">{ingredients[ingredient]}</span>
+              {/if}
             </td>
-        {/each}
-    </tr>
           {/each}
+        </tr>
+      {/each}
     </tbody>
   </table>
 </div>
 
 <style>
+  tr:hover {
+    background-color: #6bc2ee;
+  }
+
   th.exclude {
     width: 30px;
   }
@@ -102,7 +129,7 @@
     overflow-x: auto;
     margin: 1rem 0;
     border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
 
   table.recipe-table {
@@ -121,10 +148,6 @@
     background-color: #f8f9fa;
     font-weight: 600;
     color: #374151;
-  }
-
-  tr:hover {
-    background-color: #6bc2ee;
   }
 
   .ingredient-header {
@@ -152,27 +175,34 @@
   }
 
   tr:hover {
-      background-color: #6bc2ee48;
-    }
-  
-    td {
-      border: 1px solid rgb(255, 255, 255);
-      padding: 0.1rem;
-      text-align: center;
-      min-width: 30px;
-      font-size: 0.9rem;
-    }
-      
-    td.enough {
-      background-color: #73f2344f
-    }
-    td.quantity.missing * {
-      color: #ff1f1f;
-    }
-    td.dish.big {
-      border: #f65f56, 2px solid;
-    }
-    .highlight {
-        background-image: repeating-linear-gradient(to left top, transparent, rgba(0, 0, 0, 0.2), transparent 10px);
-    }
+    background-color: #6bc2ee48;
+  }
+
+  td {
+    border: 1px solid rgb(255, 255, 255);
+    padding: 0.1rem;
+    text-align: center;
+    min-width: 30px;
+    font-size: 0.9rem;
+  }
+
+  td.enough {
+    background-color: #73f2344f;
+  }
+  td.quantity.missing * {
+    color: #ff1f1f;
+  }
+  td.dish.big {
+    border:
+      #f65f56,
+      2px solid;
+  }
+  .highlight {
+    background-image: repeating-linear-gradient(
+      to left top,
+      transparent,
+      rgba(0, 0, 0, 0.2),
+      transparent 10px
+    );
+  }
 </style>

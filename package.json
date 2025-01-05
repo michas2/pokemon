@@ -1,5 +1,6 @@
 {
   "name": "pokemon",
+  "homepage": "http://www.pokemon-recipe-calculator.xyz/",
   "private": true,
   "version": "0.0.0",
   "type": "module",

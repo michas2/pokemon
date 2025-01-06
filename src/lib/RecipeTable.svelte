@@ -46,7 +46,8 @@
       )
       .sort((a, b) => a.totalIngredients - b.totalIngredients),
   );
-  function eat(name: string) {
+  function eat(event:Event,name: string) {
+    event.stopImmediatePropagation();
     let ingredients=sortedRecipes.filter((n) => n.name === name)[0].ingredients;
     Object.entries(ingredients).forEach(([ingredient, amount]) => owned[ingredient] -= amount )
   }
@@ -102,7 +103,7 @@
               big: totalIngredients > owned["total"],
             }}
           >
-            <ImageTooltip click={()=>eat(name)} {name} type="meal" />
+            <ImageTooltip click={(e)=>eat(e,name)} {name} type="meal" />
           </td>
           {#each sortedIngredients as ingredient}
             <td

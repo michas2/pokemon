@@ -309,6 +309,17 @@ export interface Ingredients {
         "Warming Ginger": 20,
         "Large Leek": 20,
         "Rousing Coffee": 12
+      },
+      "Clodsire Eclair": {
+        "Soothing Cacao": 30,
+        "Moomoo Milk": 26,
+        "Rousing Coffee": 24,
+        "Honey": 22
+      },
+      "Mold Breaker Corn Tiramisu": {
+        "Rousing Coffee": 14,
+        "Greengrass Corn": 14,
+        "Moomoo Milk": 12
       }
     }
   }

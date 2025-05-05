@@ -204,6 +204,18 @@ export interface Ingredients {
         "Bean Sausage": 28,
         "Pure Oil": 22,
         "Soft Potato": 22
+      },
+      "Petal Blizzard Layered Salad": {
+        "Fancy Egg": 25,
+        "Pure Oil": 17,
+        "Soft Potato": 15,
+        "Bean Sausage": 12
+      },
+      "Apple Acid Yogurt-Dressed Salad": {
+        "Fancy Egg": 35,
+        "Fancy Apple": 28,
+        "Snoozy Tomato": 23,
+        "Moomoo Milk": 18
       }
     },
     "Desserts": {

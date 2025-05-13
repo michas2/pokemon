@@ -30,10 +30,8 @@
 <style>
   header {
     text-align: center;
-    margin-bottom: 3rem;
     background-color: antiquewhite;
     border-radius: 15px;
-    margin: 5%;
   }
 
   main {

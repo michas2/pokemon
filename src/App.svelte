@@ -33,9 +33,8 @@
     margin-bottom: 3rem;
     background-color: antiquewhite;
     border-radius: 15px;
-    margin: 10%;
+    margin: 5%;
   }
-
 
   main {
     padding: 2rem 1rem;

@@ -17,7 +17,6 @@
   .category-tabs {
     display: flex;
     gap: 0.5rem;
-    margin-bottom: 2rem;
     background: #f0f2f5;
     padding: 0.5rem;
     border-radius: 8px;

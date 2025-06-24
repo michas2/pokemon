@@ -103,6 +103,12 @@ export interface Ingredients {
         "Snoozy Tomato": 25,
         "Tasty Mushroom": 23,
         "Rousing Coffee": 16
+      },
+      "Cut Sukiyaki Curry": {
+        "Large Leek": 27,
+        "Bean Sausage": 26,
+        "Honey": 26,
+        "Fancy Egg": 22
       }
     },
     "Salads": {

@@ -109,6 +109,12 @@ export interface Ingredients {
         "Bean Sausage": 26,
         "Honey": 26,
         "Fancy Egg": 22
+      },
+      "Role Play Pumpkaboo Stew": {
+        "Plump Pumpkin": 10,
+        "Bean Sausage": 16,
+        "Soft Potato": 18,
+        "Tasty Mushroom": 25
       }
     },
     "Salads": {
@@ -338,6 +344,12 @@ export interface Ingredients {
         "Rousing Coffee": 14,
         "Greengrass Corn": 14,
         "Moomoo Milk": 12
+      },
+      "Scary Face Pancakes": {
+        "Plump Pumpkin": 18,
+        "Fancy Egg": 24,
+        "Honey": 32,
+        "Snoozy Tomato": 29
       }
     }
   }

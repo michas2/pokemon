@@ -115,8 +115,15 @@ export interface Ingredients {
         "Bean Sausage": 16,
         "Soft Potato": 18,
         "Tasty Mushroom": 25
+      },
+      "Overgrow Avocado Gratin": {
+        "Glossy Avocado": 22,
+        "Soft Potato": 20,
+        "Moomoo Milk": 41,
+        "Pure Oil": 32,
       }
     },
+      
     "Salads": {
       "Slowpoke Tail Pepper Salad": {
         "Slowpoke Tail": 10,
@@ -228,8 +235,20 @@ export interface Ingredients {
         "Fancy Apple": 28,
         "Snoozy Tomato": 23,
         "Moomoo Milk": 18
+      },
+      "Luscious Avocado Salad": {
+        "Glossy Avocado": 14,
+        "Greengrass Soybeans": 18,
+        "Pure Oil": 10
+      },
+      "Bulldoze Guacamole and Chips": {
+        "Glossy Avocado": 28,
+        "Greengrass Corn": 25,
+        "Fiery Herb": 30,
+        "Greengrass Soybeans": 22
       }
     },
+          
     "Desserts": {
       "Fluffy Sweet Potatoes": {
         "Soft Potato": 9,
@@ -350,6 +369,11 @@ export interface Ingredients {
         "Fancy Egg": 24,
         "Honey": 32,
         "Snoozy Tomato": 29
+      },
+      "Leaf Tornado Smoothie": {
+        "Glossy Avocado": 18,
+        "Snoozy Tomato": 16,
+        "Moomoo Milk": 14
       }
     }
   }

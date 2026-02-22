@@ -374,6 +374,12 @@ export interface Ingredients {
         "Glossy Avocado": 18,
         "Snoozy Tomato": 16,
         "Moomoo Milk": 14
+      },
+      "Honey Gather Chocolate Waffles": {
+        "Honey": 38,
+        "Greengrass Corn": 28,
+        "Pure Oil": 28,
+        "Soothing Cacao": 21
       }
     }
   }

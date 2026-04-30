@@ -246,6 +246,12 @@ export interface Ingredients {
         "Greengrass Corn": 25,
         "Fiery Herb": 30,
         "Greengrass Soybeans": 22
+      },
+      "Scald Chunky Salad": {
+        "Plump Pumpkin": 20,
+        "Greengrass Corn": 18,
+        "Soft Potato": 30,
+        "Tasty Mushroom": 27
       }
     },
           

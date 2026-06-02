@@ -2,7 +2,7 @@
     interface Props {
         name: string;
         type: string;
-        click?: ((e: Event) => void) | null;
+        directClick?: ((e: Event) => void) | null;
         action?: ((e: Event) => void) | null;
         actionLabel?: string;
         secondAction?: (() => void) | null;
@@ -10,7 +10,7 @@
         tabindex?: number;
     }
 
-    let { name, type, click = null, action = null, actionLabel = '',
+    let { name, type, directClick = null, action = null, actionLabel = '',
           secondAction = null, secondActionLabel = '', tabindex = 0 }: Props = $props();
 
     let imageUrl = $derived(`https://www.serebii.net/pokemonsleep/${type}s/${name.toLowerCase().replace(/\s+/g, "")}.png`);
@@ -29,7 +29,7 @@
 
     function toggle(e: Event) {
         e.stopPropagation();
-        if (click && !action) { click(e); return; }
+        if (directClick && !action) { directClick(e); return; }
         if (!visible) position();
         visible = !visible;
     }

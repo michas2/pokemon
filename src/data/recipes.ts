@@ -1,9 +1,5 @@
-export interface Ingredients {
-    [key: string]: number;
-  }
-  
-  export interface Recipes {
-    [key: string]: Ingredients;
+export interface Recipes {
+    [key: string]: Record<string, number>;
   }
   
   export interface Book {
@@ -389,4 +385,4 @@ export interface Ingredients {
       }
     }
   }
-  export default book;
+

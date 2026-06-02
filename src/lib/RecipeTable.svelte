@@ -39,18 +39,22 @@
   function toggleMark(name: string) {
     marked = marked.includes(name) ? marked.filter((m) => m !== name) : [...marked, name];
   }
+
+  function unexclude(ingredient: string) {
+    exclude = exclude.filter((i) => i !== ingredient);
+  }
 </script>
 
-<table class="exclude"><thead><tr>
-  {#each exclude as ingredient}
-    <th transition:fly={{ y: 100, x: 100, duration: 1000 }} class="exclude"
-        role="button" tabindex="0"
-        onclick={() => exclude = exclude.filter((i) => i !== ingredient)}
-        onkeydown={(e: KeyboardEvent) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); exclude = exclude.filter((i) => i !== ingredient); } }}>
-      <ImageTooltip name={ingredient} type="ingredient" />
-    </th>
-  {/each}
-</tr></thead></table>
+{#if exclude.length}
+  <div class="excluded">
+    {#each exclude as ingredient}
+      <button transition:fly={{ y: 100, x: 100, duration: 1000 }} class="excluded-item"
+          onclick={() => unexclude(ingredient)}>
+        <ImageTooltip name={ingredient} type="ingredient" />
+      </button>
+    {/each}
+  </div>
+{/if}
 
 <div use:trapInputFocus class="table-container">
   <table class="recipe-table">
@@ -65,7 +69,7 @@
       {#each sortedIngredients as ingredient}
         <th>
           <div class="ingredient-header">
-            <ImageTooltip click={() => exclude.push(ingredient)} name={ingredient} type="ingredient" tabindex={-1} />
+            <ImageTooltip directClick={() => exclude.push(ingredient)} name={ingredient} type="ingredient" tabindex={-1} />
             <input type="number" min="0" bind:value={owned[ingredient]} class="limit-input" aria-label="{ingredient} owned" />
           </div>
         </th>
@@ -96,7 +100,11 @@
 </div>
 
 <style>
-  th.exclude { width: 30px; border-radius: 15px; }
+  .excluded { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.5rem; }
+  .excluded-item {
+    all: unset; cursor: pointer; padding: 0.25rem;
+    background: #f8f9fa; border-radius: 15px;
+  }
 
   .table-container {
     margin: 1rem 0; border-radius: 12px;

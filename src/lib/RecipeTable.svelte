@@ -122,11 +122,11 @@
   table.recipe-table { border-collapse: collapse; width: 100%; }
 
   th {
-    border: 1px solid #e8edf3; padding: 0.1rem; text-align: center;
-    min-width: 20px; background-color: #f5f7fa; font-weight: 600; color: #374151;
+    border: 1px solid #ddd; padding: 0.1rem; text-align: center;
+    min-width: 18px; background-color: #e8ecf0; font-weight: 600; color: #374151;
   }
 
-  .ingredient-header { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
+  .ingredient-header { display: flex; flex-direction: column; align-items: center; gap: 0.2rem; }
 
   .limit-input {
     width: 20px; padding: 0; border: 1px solid #ddd; border-radius: 4px;
@@ -139,8 +139,8 @@
   tr:hover { background-color: #6bc2ee48; }
 
   td {
-    border: 1px solid #e8edf3; padding: 0.1rem; text-align: center;
-    min-width: 20px; font-size: 0.8rem;
+    border: 1px solid #ddd; padding: 0.15rem 0.2rem; text-align: center;
+    min-width: 18px; font-size: 1rem; font-weight: 500;
   }
 
   td.enough { background-color: #73f2344f; }

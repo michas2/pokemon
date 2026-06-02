@@ -27,10 +27,10 @@
 
 <style>
   main {
-    background: white;
+    background: #f0f2f5;
     border-radius: 16px;
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
-    padding: 1.5rem;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
+    padding: 1rem;
   }
 
   h1 {

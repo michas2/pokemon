@@ -61,6 +61,9 @@
 
     .tooltip {
         position: absolute;
+        bottom: 100%;
+        left: 50%;
+        transform: translateX(-50%);
         background: white;
         padding: 0.5rem;
         border-radius: 8px;

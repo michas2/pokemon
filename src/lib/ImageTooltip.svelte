@@ -2,13 +2,18 @@
     let { name, type, click = null, tabindex = 0 }: { name: string; type: string; click?: ((e: Event) => void) | null; tabindex?: number } = $props();
     let imageUrl = $derived( `https://www.serebii.net/pokemonsleep/${type}s/${name.toLowerCase().replace(/\s+/g, "")}.png` );
     let tooltipVisible = $state(false);
-    let showAbove = $state(true);
+    let tooltipStyle = $state('');
     let btnEl: HTMLButtonElement;
 
     function toggle() {
         if (!tooltipVisible) {
             const rect = btnEl.getBoundingClientRect();
-            showAbove = rect.top > 150;
+            const above = rect.top > 150;
+            if (above) {
+                tooltipStyle = `bottom: ${window.innerHeight - rect.top}px; left: ${rect.left + rect.width / 2}px; transform: translateX(-50%);`;
+            } else {
+                tooltipStyle = `top: ${rect.bottom}px; left: ${rect.left + rect.width / 2}px; transform: translateX(-50%);`;
+            }
         }
         tooltipVisible = !tooltipVisible;
     }
@@ -38,7 +43,7 @@
         <img src={imageUrl} alt={name} class="icon" onerror={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }} />
     </button>
     {#if tooltipVisible}
-        <div class="tooltip" class:above={showAbove} class:below={!showAbove}>
+        <div class="tooltip" style={tooltipStyle}>
             <img src={imageUrl} alt={name} class="preview" />
             <span class="tooltip-text">{name}</span>
             {#if click}
@@ -67,23 +72,13 @@
     }
 
     .tooltip {
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
+        position: fixed;
         background: white;
         padding: 0.5rem;
         border-radius: 8px;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
         z-index: 1000;
         white-space: nowrap;
-    }
-
-    .tooltip.above {
-        bottom: 100%;
-    }
-
-    .tooltip.below {
-        top: 100%;
     }
 
     .preview {

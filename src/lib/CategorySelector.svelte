@@ -19,7 +19,7 @@
     flex-wrap: wrap;
     gap: 0.4rem;
     padding: 0.25rem;
-    background: #2d3748;
+    background: #f0ece4;
     border-radius: 8px;
     margin-bottom: 1rem;
   }
@@ -30,7 +30,7 @@
     border: none;
     border-radius: 6px;
     background: transparent;
-    color: #a0aec0;
+    color: #6b5e4f;
     font-weight: 500;
     cursor: pointer;
     transition: all 0.2s ease;
@@ -38,11 +38,11 @@
   }
 
   button:hover {
-    background: #4a5568;
+    background: rgba(232, 168, 56, 0.1);
   }
 
   button.active {
-    background: #4361ee;
+    background: #e8a838;
     color: white;
     font-weight: 600;
   }

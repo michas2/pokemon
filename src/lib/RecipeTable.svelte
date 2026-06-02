@@ -108,45 +108,45 @@
   .excluded { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.75rem; }
   .excluded-item {
     all: unset; cursor: pointer; padding: 0.3rem;
-    background: #4a5568; border-radius: 50%; transition: background 0.2s;
+    background: #f0ece4; border-radius: 50%; transition: background 0.2s;
   }
-  .excluded-item:hover { background: #5a6a7e; }
+  .excluded-item:hover { background: #e4ddd3; }
   .excluded-icon { width: 24px; height: 24px; object-fit: contain; display: block; }
 
   .table-container {
     margin: 0.5rem 0; border-radius: 10px;
-    border: 1px solid #4a5568;
-    background: #2d3748; overflow-x: auto;
+    border: 1px solid #e0dcd4;
+    background: #fff; overflow-x: auto;
   }
 
   table.recipe-table { border-collapse: collapse; width: 100%; }
 
   th {
-    border: 1px solid #4a5568; padding: 0.1rem; text-align: center;
-    min-width: 18px; background-color: #374151; font-weight: 600; color: #e2e8f0;
+    border: 1px solid #e0dcd4; padding: 0.1rem; text-align: center;
+    min-width: 18px; background-color: #f7f4ef; font-weight: 600; color: #4a3f35;
   }
 
   .ingredient-header { display: flex; flex-direction: column; align-items: center; gap: 0.2rem; }
 
   .limit-input {
-    width: 20px; padding: 0; border: 1px solid #ddd; border-radius: 4px;
+    width: 20px; padding: 0; border: 1px solid #d4cfc7; border-radius: 4px;
     text-align: center; appearance: textfield;
     -webkit-appearance: textfield; -moz-appearance: textfield;
   }
   .limit-input::-webkit-outer-spin-button,
   .limit-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
 
-  tr:hover { background-color: #4a556844; }
+  tr:hover { background-color: #fdf6e8; }
 
   td {
-    border: 1px solid #4a5568; padding: 0.15rem 0.2rem; text-align: center;
-    min-width: 18px; font-size: 1rem; font-weight: 500; color: #e2e8f0;
+    border: 1px solid #e0dcd4; padding: 0.15rem 0.2rem; text-align: center;
+    min-width: 18px; font-size: 1rem; font-weight: 500; color: #2c2c2c;
   }
 
-  td.enough { background-color: #22543d; }
-  td.quantity.missing * { color: #fc8181; }
-  td.dish.big { border: 2px solid #fc8181; }
+  td.enough { background-color: #d4edda; }
+  td.quantity.missing * { color: #c0392b; }
+  td.dish.big { border: 2px solid #e74c3c; }
   .highlight {
-    background-image: repeating-linear-gradient(to left top, transparent, rgba(255,255,255,0.06), transparent 10px);
+    background-image: repeating-linear-gradient(to left top, transparent, rgba(232,168,56,0.1), transparent 10px);
   }
 </style>

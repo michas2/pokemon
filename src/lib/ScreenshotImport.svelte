@@ -53,10 +53,10 @@
 <style>
   .import-section { display: flex; align-items: center; gap: 1rem; margin: 0.5rem 0; }
   .import-btn {
-    padding: 0.4rem 0.8rem; border-radius: 6px; background: #4361ee;
+    padding: 0.4rem 0.8rem; border-radius: 6px; background: #e8a838;
     color: white; font-weight: 500; cursor: pointer; font-size: 0.85rem;
     border: none; transition: background 0.2s;
   }
-  .import-btn:hover { background: #3a56d4; }
+  .import-btn:hover { background: #d4952e; }
   .error { color: #f44336; font-size: 0.85rem; }
 </style>

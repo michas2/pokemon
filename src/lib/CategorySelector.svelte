@@ -19,7 +19,7 @@
     flex-wrap: wrap;
     gap: 0.4rem;
     padding: 0.25rem;
-    background: #f0ece4;
+    background: var(--tabs-bg);
     border-radius: 8px;
     margin-bottom: 1rem;
   }
@@ -30,7 +30,7 @@
     border: none;
     border-radius: 6px;
     background: transparent;
-    color: #6b5e4f;
+    color: var(--text-muted);
     font-weight: 500;
     cursor: pointer;
     transition: all 0.2s ease;
@@ -38,11 +38,11 @@
   }
 
   button:hover {
-    background: rgba(232, 168, 56, 0.1);
+    background: var(--tab-hover);
   }
 
   button.active {
-    background: #e8a838;
+    background: var(--accent);
     color: white;
     font-weight: 600;
   }

@@ -17,24 +17,16 @@
   .category-tabs {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem;
+    gap: 0.4rem;
+    padding: 0.25rem;
     background: #f0f2f5;
-    padding: 0.5rem;
     border-radius: 8px;
-    margin-right: auto;
-    margin-left: auto;
-    max-width: 60%;
-  }
-
-  @media (max-width: 768px) {
-    .category-tabs {
-      max-width: 100%;
-    }
+    margin-bottom: 1rem;
   }
 
   button {
     flex: 1;
-    padding: 0.75rem 1.5rem;
+    padding: 0.6rem 1rem;
     border: none;
     border-radius: 6px;
     background: transparent;
@@ -42,15 +34,17 @@
     font-weight: 500;
     cursor: pointer;
     transition: all 0.2s ease;
+    min-width: fit-content;
   }
 
   button:hover {
-    background: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.7);
   }
 
   button.active {
     background: white;
-    color: #646cff;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    color: #4361ee;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    font-weight: 600;
   }
 </style>

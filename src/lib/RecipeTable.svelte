@@ -105,24 +105,25 @@
 </div>
 
 <style>
-  .excluded { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.5rem; }
+  .excluded { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.75rem; }
   .excluded-item {
-    all: unset; cursor: pointer; padding: 0.25rem;
-    background: #f8f9fa; border-radius: 15px;
+    all: unset; cursor: pointer; padding: 0.3rem;
+    background: #f0f2f5; border-radius: 50%; transition: background 0.2s;
   }
+  .excluded-item:hover { background: #e0e4ea; }
   .excluded-icon { width: 24px; height: 24px; object-fit: contain; display: block; }
 
   .table-container {
-    margin: 1rem 0; border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    background: #f0f2f5; overflow-x: auto;
+    margin: 0.5rem 0; border-radius: 10px;
+    border: 1px solid #e8edf3;
+    background: #fafbfc; overflow-x: auto;
   }
 
   table.recipe-table { border-collapse: collapse; width: 100%; }
 
   th {
-    border: 1px solid white; padding: 0.1rem; text-align: center;
-    min-width: 20px; background-color: #f8f9fa; font-weight: 600; color: #374151;
+    border: 1px solid #e8edf3; padding: 0.1rem; text-align: center;
+    min-width: 20px; background-color: #f5f7fa; font-weight: 600; color: #374151;
   }
 
   .ingredient-header { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
@@ -138,7 +139,7 @@
   tr:hover { background-color: #6bc2ee48; }
 
   td {
-    border: 1px solid white; padding: 0.1rem; text-align: center;
+    border: 1px solid #e8edf3; padding: 0.1rem; text-align: center;
     min-width: 20px; font-size: 0.8rem;
   }
 

@@ -13,9 +13,7 @@
 </script>
 
 <main>
-  <header>
-    <h1>Pokemon Recipe Calculator</h1>
-  </header>
+  <h1>🍳 Pokemon Recipe Calculator</h1>
     
   <CategorySelector 
     {categories}
@@ -28,19 +26,22 @@
 </main>
 
 <style>
-  header {
-    text-align: center;
-    background-color: antiquewhite;
-    border-radius: 15px;
+  main {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+    padding: 1.5rem;
   }
 
-  main {
-    padding: 2rem 1rem;
+  h1 {
+    margin: 0 0 1rem;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #1a1a2e;
   }
 
   @media (min-width: 768px) {
-    main {
-      padding: 2rem;
-    }
+    main { padding: 2rem; }
+    h1 { font-size: 1.6rem; }
   }
 </style>

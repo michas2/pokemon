@@ -8,9 +8,10 @@
     function toggle() {
         if (!tooltipVisible) {
             const rect = btnEl.getBoundingClientRect();
-            const above = rect.top > 150;
-            if (above) {
-                tooltipStyle = `bottom: ${window.innerHeight - rect.top}px; left: ${rect.left + rect.width / 2}px; transform: translateX(-50%);`;
+            const spaceAbove = rect.top;
+            const spaceBelow = window.innerHeight - rect.bottom;
+            if (spaceAbove > spaceBelow) {
+                tooltipStyle = `top: ${rect.top}px; left: ${rect.left + rect.width / 2}px; transform: translate(-50%, -100%);`;
             } else {
                 tooltipStyle = `top: ${rect.bottom}px; left: ${rect.left + rect.width / 2}px; transform: translateX(-50%);`;
             }
@@ -34,7 +35,7 @@
 </script>
 
 <div class="image-tooltip" role="group"
-    onmouseenter={() => tooltipVisible = true}
+    onmouseenter={() => { if (btnEl) { const rect = btnEl.getBoundingClientRect(); const above = rect.top > window.innerHeight - rect.bottom; tooltipStyle = above ? `top: ${rect.top}px; left: ${rect.left + rect.width / 2}px; transform: translate(-50%, -100%);` : `top: ${rect.bottom}px; left: ${rect.left + rect.width / 2}px; transform: translateX(-50%);`; } tooltipVisible = true; }}
     onmouseleave={() => tooltipVisible = false}>
     <button class="icon-btn"
     {tabindex}

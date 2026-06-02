@@ -108,22 +108,22 @@
   .excluded { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.75rem; }
   .excluded-item {
     all: unset; cursor: pointer; padding: 0.3rem;
-    background: #f0f2f5; border-radius: 50%; transition: background 0.2s;
+    background: #4a5568; border-radius: 50%; transition: background 0.2s;
   }
-  .excluded-item:hover { background: #e0e4ea; }
+  .excluded-item:hover { background: #5a6a7e; }
   .excluded-icon { width: 24px; height: 24px; object-fit: contain; display: block; }
 
   .table-container {
     margin: 0.5rem 0; border-radius: 10px;
-    border: 1px solid #e8edf3;
-    background: #fafbfc; overflow-x: auto;
+    border: 1px solid #4a5568;
+    background: #2d3748; overflow-x: auto;
   }
 
   table.recipe-table { border-collapse: collapse; width: 100%; }
 
   th {
-    border: 1px solid #ddd; padding: 0.1rem; text-align: center;
-    min-width: 18px; background-color: #e8ecf0; font-weight: 600; color: #374151;
+    border: 1px solid #4a5568; padding: 0.1rem; text-align: center;
+    min-width: 18px; background-color: #374151; font-weight: 600; color: #e2e8f0;
   }
 
   .ingredient-header { display: flex; flex-direction: column; align-items: center; gap: 0.2rem; }
@@ -136,17 +136,17 @@
   .limit-input::-webkit-outer-spin-button,
   .limit-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
 
-  tr:hover { background-color: #6bc2ee48; }
+  tr:hover { background-color: #4a556844; }
 
   td {
-    border: 1px solid #ddd; padding: 0.15rem 0.2rem; text-align: center;
-    min-width: 18px; font-size: 1rem; font-weight: 500;
+    border: 1px solid #4a5568; padding: 0.15rem 0.2rem; text-align: center;
+    min-width: 18px; font-size: 1rem; font-weight: 500; color: #e2e8f0;
   }
 
-  td.enough { background-color: #73f2344f; }
-  td.quantity.missing * { color: #ff1f1f; }
-  td.dish.big { border: 2px solid #f65f56; }
+  td.enough { background-color: #22543d; }
+  td.quantity.missing * { color: #fc8181; }
+  td.dish.big { border: 2px solid #fc8181; }
   .highlight {
-    background-image: repeating-linear-gradient(to left top, transparent, rgba(0,0,0,0.2), transparent 10px);
+    background-image: repeating-linear-gradient(to left top, transparent, rgba(255,255,255,0.06), transparent 10px);
   }
 </style>

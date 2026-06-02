@@ -27,7 +27,8 @@
 
 <style>
   main {
-    background: #f0f2f5;
+    background: #3a4556;
+    color: #e2e8f0;
     border-radius: 16px;
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
     padding: 1rem;
@@ -37,7 +38,7 @@
     margin: 0 0 1rem;
     font-size: 1.4rem;
     font-weight: 700;
-    color: #1a1a2e;
+    color: #e2e8f0;
   }
 
   @media (min-width: 768px) {

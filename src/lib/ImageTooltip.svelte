@@ -1,11 +1,15 @@
 <script lang="ts">
-    let { name, type, click = null, tabindex = 0 }: { name: string; type: string; click?: ((e: Event) => void) | null; tabindex?: number } = $props();
+    let { name, type, click = null, action = null, actionLabel = '', tabindex = 0 }: { name: string; type: string; click?: ((e: Event) => void) | null; action?: ((e: Event) => void) | null; actionLabel?: string; tabindex?: number } = $props();
     let imageUrl = $derived( `https://www.serebii.net/pokemonsleep/${type}s/${name.toLowerCase().replace(/\s+/g, "")}.png` );
     let tooltipVisible = $state(false);
     let tooltipStyle = $state('');
     let btnEl: HTMLButtonElement;
 
-    function toggle() {
+    function toggle(e: Event) {
+        if (click && !action) {
+            click(e);
+            return;
+        }
         if (!tooltipVisible) {
             const rect = btnEl.getBoundingClientRect();
             const spaceAbove = rect.top;
@@ -47,8 +51,8 @@
         <div class="tooltip" style={tooltipStyle}>
             <img src={imageUrl} alt={name} class="preview" />
             <span class="tooltip-text">{name}</span>
-            {#if click}
-                <button class="eat-btn" onclick={(e) => { e.stopPropagation(); click(e); tooltipVisible = false; }}>Eat</button>
+            {#if action}
+                <button class="eat-btn" onclick={(e) => { e.stopPropagation(); action(e); tooltipVisible = false; }}>{actionLabel}</button>
             {/if}
         </div>
     {/if}

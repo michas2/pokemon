@@ -103,7 +103,7 @@
               big: totalIngredients > owned["total"],
             }}
           >
-            <ImageTooltip click={(e)=>eat(e,name)} {name} type="meal" />
+            <ImageTooltip action={(e)=>eat(e,name)} actionLabel="Eat" {name} type="meal" />
           </td>
           {#each sortedIngredients as ingredient}
             <td

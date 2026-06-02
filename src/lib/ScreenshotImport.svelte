@@ -19,7 +19,10 @@
     loading = true;
     error = '';
     try {
-      const worker = await createWorker('eng');
+      const worker = await createWorker('eng', 1, {
+        langPath: 'https://tessdata.projectnaptha.com/4.0.0_fast',
+      });
+      await worker.setParameters({ tessedit_char_whitelist: '0123456789x×' });
       const { data: { text } } = await worker.recognize(source);
       await worker.terminate();
 

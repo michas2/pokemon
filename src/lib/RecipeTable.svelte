@@ -75,7 +75,7 @@
         {#each sortedIngredients as ingredient}
         <th>
           <div class="ingredient-header">
-            <ImageTooltip click={() => exclude.push(ingredient)} name={ingredient} type="ingredient" />
+            <ImageTooltip click={() => exclude.push(ingredient)} name={ingredient} type="ingredient" tabindex={-1} />
             <input type="number" min="0" bind:value={owned[ingredient]} class="limit-input" aria-label="{ingredient} owned" />
           </div>
         </th>
@@ -132,6 +132,7 @@
     border-radius: 12px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     background: #f0f2f5;
+    overflow-x: auto;
   }
 
   table.recipe-table {

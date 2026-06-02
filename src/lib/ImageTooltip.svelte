@@ -1,11 +1,12 @@
 <script lang="ts">
-    let { name, type, click = null }: { name: string; type: string; click?: ((e: Event) => void) | null } = $props();
+    let { name, type, click = null, tabindex = 0 }: { name: string; type: string; click?: ((e: Event) => void) | null; tabindex?: number } = $props();
     let imageUrl = $derived( `https://www.serebii.net/pokemonsleep/${type}s/${name.toLowerCase().replace(/\s+/g, "")}.png` );
     let tooltipVisible = $state(false);
 </script>
 
 <div class="image-tooltip">
     <button class="icon-btn"
+    {tabindex}
     onclick={click}
     onmouseenter={() => tooltipVisible = true}
     onmouseleave={() => tooltipVisible = false}>

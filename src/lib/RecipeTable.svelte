@@ -4,6 +4,7 @@
   import { trapInputFocus } from "./actions.svelte";
   import { fly } from 'svelte/transition';
   import ImageTooltip from "./ImageTooltip.svelte";
+  import ScreenshotImport from "./ScreenshotImport.svelte";
 
   let { recipes }: { recipes: Recipes } = $props();
 
@@ -57,6 +58,8 @@
     {/each}
   </div>
 {/if}
+
+<ScreenshotImport onImport={(counts) => { Object.entries(counts).forEach(([k, v]) => owned[k] = v); }} />
 
 <div use:trapInputFocus class="table-container">
   <table class="recipe-table">

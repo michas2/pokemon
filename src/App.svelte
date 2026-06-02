@@ -1,10 +1,10 @@
 <script lang="ts">
-  import { book, type Book, type Recipes} from './data/recipes';
+  import { book, type Recipes} from './data/recipes';
 
   import RecipeTable from './lib/RecipeTable.svelte';
   import CategorySelector from './lib/CategorySelector.svelte';
 
-  const categories: string[] = Object.keys(book) as string[];
+  const categories: string[] = Object.keys(book);
   
   let selectedCategory: string = $state( localStorage.getItem("category") || categories[0]);
   $effect(() => localStorage.setItem("category", selectedCategory));

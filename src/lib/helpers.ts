@@ -17,7 +17,9 @@ const order: string[] =  [
   "Slowpoke Tail",
   "Greengrass Soybeans",
   "Greengrass Corn",
-  "Rousing Coffee"
+  "Rousing Coffee",
+  "Plump Pumpkin",
+  "Glossy Avocado"
 ];
 
 export function getAllIngredients(recipes: Recipes): string[] {

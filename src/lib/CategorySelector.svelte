@@ -16,12 +16,20 @@
 <style>
   .category-tabs {
     display: flex;
+    flex-wrap: wrap;
     gap: 0.5rem;
     background: #f0f2f5;
     padding: 0.5rem;
     border-radius: 8px;
-    margin-right: 20%;
-    margin-left: 20%;
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 60%;
+  }
+
+  @media (max-width: 768px) {
+    .category-tabs {
+      max-width: 100%;
+    }
   }
 
   button {

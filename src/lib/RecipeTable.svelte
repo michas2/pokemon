@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { type Recipes, type Ingredients } from "../data/recipes";
+  import { type Recipes } from "../data/recipes";
   import { getAllIngredients, getTotalIngredients } from "./helpers";
-  import { trapFocus } from "./actions.svelte";
+  import { trapInputFocus } from "./actions.svelte";
   import { fly } from 'svelte/transition';
 
   let { recipes }: { recipes: Recipes } = $props();
@@ -9,7 +9,7 @@
   import ImageTooltip from "./ImageTooltip.svelte";
 
   let owned: { [key: string]: number } = $state(
-    JSON.parse(localStorage.getItem("owned") || "{}"),
+    (() => { try { return JSON.parse(localStorage.getItem("owned") || "{}"); } catch { return {}; } })(),
   );
   $effect(() => localStorage.setItem("owned", JSON.stringify(owned)));
   $effect(() =>
@@ -21,12 +21,12 @@
   );
 
   let exclude: string[] = $state(
-    JSON.parse(localStorage.getItem("exclude") || "[]"),
+    (() => { try { return JSON.parse(localStorage.getItem("exclude") || "[]"); } catch { return []; } })(),
   );
   $effect(() => localStorage.setItem("exclude", JSON.stringify(exclude)));
 
   let marked: string[] = $state(
-    JSON.parse(localStorage.getItem("marked") || "[]"),
+    (() => { try { return JSON.parse(localStorage.getItem("marked") || "[]"); } catch { return []; } })(),
   );
   $effect(() => localStorage.setItem("marked", JSON.stringify(marked)));
 
@@ -44,31 +44,31 @@
       .filter((x) =>
         Object.keys(x.ingredients).every((i) => sortedIngredients.includes(i)),
       )
-      .sort((a, b) => a.totalIngredients - b.totalIngredients),
+      .sort((a, b) => b.totalIngredients - a.totalIngredients),
   );
   function eat(event:Event,name: string) {
     event.stopImmediatePropagation();
     let ingredients=sortedRecipes.filter((n) => n.name === name)[0].ingredients;
-    Object.entries(ingredients).forEach(([ingredient, amount]) => owned[ingredient] -= amount )
+    Object.entries(ingredients).forEach(([ingredient, amount]) => owned[ingredient] = Math.max(0, owned[ingredient] - amount) )
   }
 </script>
 
 <table class="exclude"><thead><tr>
   {#each exclude as ingredient}
-  <th transition:fly={{ y: 100,x:100, duration: 1000 }} class="exclude" onclick={() => (exclude = exclude.filter((i) => i !== ingredient))}>
+  <th transition:fly={{ y: 100,x:100, duration: 1000 }} class="exclude" role="button" tabindex="0" onclick={() => (exclude = exclude.filter((i) => i !== ingredient))} onkeydown={(e: KeyboardEvent) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); exclude = exclude.filter((i) => i !== ingredient); } }}>
     <ImageTooltip  name={ingredient} type="ingredient" />
   </th>
   {/each}
 </tr></thead></table>
 
-<div use:trapFocus class="table-container">
+<div use:trapInputFocus class="table-container">
   <table class="recipe-table">
     <thead>
       <tr>
         <th>
           <div class="ingredient-header">
             <div>Total</div>
-            <input type="number" min="0" bind:value={owned["total"]} class="limit-input" />
+            <input type="number" min="0" bind:value={owned["total"]} class="limit-input" aria-label="Total owned" />
           </div>
         </th>
         <th><div class="ingredient-header">Recipe</div></th>
@@ -76,7 +76,7 @@
         <th>
           <div class="ingredient-header">
             <ImageTooltip click={() => exclude.push(ingredient)} name={ingredient} type="ingredient" />
-            <input type="number" min="0" bind:value={owned[ingredient]} class="limit-input" />
+            <input type="number" min="0" bind:value={owned[ingredient]} class="limit-input" aria-label="{ingredient} owned" />
           </div>
         </th>
         {/each}
@@ -95,7 +95,7 @@
               }
             }}
             class={{
-              dish: 1,
+              dish: true,
               highlight: marked.includes(name),
               enough: Object.entries(ingredients).every(
                 ([ingredient, amount]) => owned[ingredient] >= amount,
@@ -123,10 +123,6 @@
 </div>
 
 <style>
-  tr:hover {
-    background-color: #6bc2ee;
-  }
-
   th.exclude {
     width: 30px;
     border-radius: 15px;
@@ -148,9 +144,6 @@
     padding: 0.1rem;
     text-align: center;
     min-width: 20px;
-  }
-
-  th {
     background-color: #f8f9fa;
     font-weight: 600;
     color: #374151;
@@ -199,9 +192,7 @@
     color: #ff1f1f;
   }
   td.dish.big {
-    border:
-      #f65f56,
-      2px solid;
+    border: 2px solid #f65f56;
   }
   .highlight {
     background-image: repeating-linear-gradient(

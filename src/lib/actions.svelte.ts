@@ -1,39 +1,30 @@
-  export function trapFocus(node: HTMLElement) {
-	const previous: Element|null = document.activeElement;
-
-	function focusable(): HTMLElement[] {
-		return Array.from(node.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'));
+export function trapInputFocus(node: HTMLElement) {
+	function inputs(): HTMLInputElement[] {
+		return Array.from(node.querySelectorAll('input'));
 	}
 
 	function handleKeydown(event: KeyboardEvent) {
 		if (event.key !== 'Tab') return;
+		const elements = inputs();
+		if (!elements.length) return;
 
 		const current = document.activeElement;
+		if (!elements.includes(current as HTMLInputElement)) return;
 
-		const elements:HTMLElement[] = focusable();
-		const first = elements.at(0);
-		const last = elements.at(-1)
+		const first = elements[0];
+		const last = elements[elements.length - 1];
 
-		if (event.shiftKey && current === first && last) {
+		if (event.shiftKey && current === first) {
 			last.focus();
 			event.preventDefault();
-		}
-
-		if (!event.shiftKey && current === last && first) {
+		} else if (!event.shiftKey && current === last) {
 			first.focus();
 			event.preventDefault();
 		}
 	}
 
 	$effect(() => {
-		focusable()[0]?.focus();
 		node.addEventListener('keydown', handleKeydown);
-
-		return () => {
-			node.removeEventListener('keydown', handleKeydown);
-            if (previous instanceof HTMLElement) {
-			  previous.focus();
-            }
-		};
+		return () => node.removeEventListener('keydown', handleKeydown);
 	});
 }

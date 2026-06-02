@@ -1,15 +1,16 @@
 <script lang="ts">
-    let { name, type, click = null }  = $props();
+    let { name, type, click = null }: { name: string; type: string; click?: ((e: Event) => void) | null } = $props();
     let imageUrl = $derived( `https://www.serebii.net/pokemonsleep/${type}s/${name.toLowerCase().replace(/\s+/g, "")}.png` );
     let tooltipVisible = $state(false);
 </script>
 
 <div class="image-tooltip">
-    <!-- svelte-ignore a11y_no_noninteractive_element_interactions, a11y_click_events_have_key_events -->
-    <img  src={imageUrl} alt={name} class="icon"
+    <button class="icon-btn"
     onclick={click}
     onmouseenter={() => tooltipVisible = true}
-    onmouseleave={() => tooltipVisible = false} />
+    onmouseleave={() => tooltipVisible = false}>
+        <img src={imageUrl} alt={name} class="icon" onerror={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }} />
+    </button>
     {#if tooltipVisible}
         <div class="tooltip">
             <img src={imageUrl} alt={name} class="preview" />
@@ -28,7 +29,12 @@
         width: 24px;
         height: 24px;
         object-fit: contain;
+    }
+
+    .icon-btn {
+        all: unset;
         cursor: pointer;
+        display: inline-flex;
     }
 
     .tooltip {

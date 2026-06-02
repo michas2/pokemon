@@ -3,17 +3,31 @@
     let imageUrl = $derived( `https://www.serebii.net/pokemonsleep/${type}s/${name.toLowerCase().replace(/\s+/g, "")}.png` );
     let tooltipVisible = $state(false);
 
-    function toggle(e: Event) {
+    function toggle() {
         tooltipVisible = !tooltipVisible;
     }
+
+    function handleClickOutside(e: MouseEvent) {
+        const target = e.target as HTMLElement;
+        if (!target.closest('.image-tooltip')) {
+            tooltipVisible = false;
+        }
+    }
+
+    $effect(() => {
+        if (tooltipVisible) {
+            document.addEventListener('click', handleClickOutside, true);
+            return () => document.removeEventListener('click', handleClickOutside, true);
+        }
+    });
 </script>
 
-<div class="image-tooltip">
-    <button class="icon-btn"
-    {tabindex}
-    onclick={toggle}
+<div class="image-tooltip" role="group"
     onmouseenter={() => tooltipVisible = true}
     onmouseleave={() => tooltipVisible = false}>
+    <button class="icon-btn"
+    {tabindex}
+    onclick={toggle}>
         <img src={imageUrl} alt={name} class="icon" onerror={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }} />
     </button>
     {#if tooltipVisible}
@@ -21,7 +35,7 @@
             <img src={imageUrl} alt={name} class="preview" />
             <span class="tooltip-text">{name}</span>
             {#if click}
-                <button class="eat-btn" onclick={(e) => { click(e); tooltipVisible = false; }}>Eat</button>
+                <button class="eat-btn" onclick={(e) => { e.stopPropagation(); click(e); tooltipVisible = false; }}>Eat</button>
             {/if}
         </div>
     {/if}

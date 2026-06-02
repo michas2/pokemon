@@ -30,25 +30,25 @@
 
 :root.dark {
   --bg: #1a1b23;
-  --card: #252630;
-  --surface: #2d2e3a;
-  --surface-alt: #333442;
-  --border: #3d3e4e;
-  --text: #e4e4e8;
-  --text-muted: #9e9eb0;
+  --card: #22232d;
+  --surface: #2a2b38;
+  --surface-alt: #323342;
+  --border: #4a4b5e;
+  --text: #e8e8ec;
+  --text-muted: #b0b0c0;
   --accent: #f0b650;
   --accent-hover: #e8a838;
-  --hover: #33344a;
-  --enough: #1e3a2a;
+  --hover: #32334a;
+  --enough: rgba(72, 199, 116, 0.15);
   --enough-text: #6ee7a0;
   --missing: #f87171;
   --big-border: #f87171;
   --highlight: rgba(240,182,80,0.08);
-  --input-border: #4a4b5e;
-  --excluded-bg: #33344a;
-  --excluded-hover: #3d3e50;
-  --tabs-bg: #2d2e3a;
-  --tab-hover: #3d3e50;
+  --input-border: #555568;
+  --excluded-bg: #32334a;
+  --excluded-hover: #3d3e52;
+  --tabs-bg: #2a2b38;
+  --tab-hover: #3a3b4a;
 }
 
 body {

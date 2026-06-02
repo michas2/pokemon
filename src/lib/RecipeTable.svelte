@@ -129,8 +129,9 @@
   .ingredient-header { display: flex; flex-direction: column; align-items: center; gap: 0.2rem; }
 
   .limit-input {
-    width: 20px; padding: 0; border: 1px solid var(--input-border); border-radius: 4px;
-    text-align: center; appearance: textfield; background: var(--surface); color: var(--text);
+    width: 24px; padding: 2px; border: 1px solid var(--input-border); border-radius: 4px;
+    text-align: center; appearance: textfield; background: var(--card); color: var(--accent);
+    font-weight: 700; font-size: 0.9rem;
     -webkit-appearance: textfield; -moz-appearance: textfield;
   }
   .limit-input::-webkit-outer-spin-button,

@@ -1,25 +1,26 @@
 <script lang="ts">
-    let { name, type, click = null, action = null, actionLabel = '', tabindex = 0 }: { name: string; type: string; click?: ((e: Event) => void) | null; action?: ((e: Event) => void) | null; actionLabel?: string; tabindex?: number } = $props();
+    let { name, type, click = null, action = null, actionLabel = '', secondAction = null, secondActionLabel = '', tabindex = 0 }: { name: string; type: string; click?: ((e: Event) => void) | null; action?: ((e: Event) => void) | null; actionLabel?: string; secondAction?: (() => void) | null; secondActionLabel?: string; tabindex?: number } = $props();
     let imageUrl = $derived( `https://www.serebii.net/pokemonsleep/${type}s/${name.toLowerCase().replace(/\s+/g, "")}.png` );
     let tooltipVisible = $state(false);
     let tooltipStyle = $state('');
     let btnEl: HTMLButtonElement;
 
+    function positionTooltip() {
+        if (!btnEl) return;
+        const rect = btnEl.getBoundingClientRect();
+        const above = rect.top > window.innerHeight - rect.bottom;
+        tooltipStyle = above
+            ? `top: ${rect.top}px; left: ${rect.left + rect.width / 2}px; transform: translate(-50%, -100%);`
+            : `top: ${rect.bottom}px; left: ${rect.left + rect.width / 2}px; transform: translateX(-50%);`;
+    }
+
     function toggle(e: Event) {
+        e.stopPropagation();
         if (click && !action) {
             click(e);
             return;
         }
-        if (!tooltipVisible) {
-            const rect = btnEl.getBoundingClientRect();
-            const spaceAbove = rect.top;
-            const spaceBelow = window.innerHeight - rect.bottom;
-            if (spaceAbove > spaceBelow) {
-                tooltipStyle = `top: ${rect.top}px; left: ${rect.left + rect.width / 2}px; transform: translate(-50%, -100%);`;
-            } else {
-                tooltipStyle = `top: ${rect.bottom}px; left: ${rect.left + rect.width / 2}px; transform: translateX(-50%);`;
-            }
-        }
+        if (!tooltipVisible) positionTooltip();
         tooltipVisible = !tooltipVisible;
     }
 
@@ -39,7 +40,7 @@
 </script>
 
 <div class="image-tooltip" role="group"
-    onmouseenter={() => { if (btnEl) { const rect = btnEl.getBoundingClientRect(); const above = rect.top > window.innerHeight - rect.bottom; tooltipStyle = above ? `top: ${rect.top}px; left: ${rect.left + rect.width / 2}px; transform: translate(-50%, -100%);` : `top: ${rect.bottom}px; left: ${rect.left + rect.width / 2}px; transform: translateX(-50%);`; } tooltipVisible = true; }}
+    onmouseenter={() => { positionTooltip(); tooltipVisible = true; }}
     onmouseleave={() => tooltipVisible = false}>
     <button class="icon-btn"
     {tabindex}
@@ -53,6 +54,9 @@
             <span class="tooltip-text">{name}</span>
             {#if action}
                 <button class="eat-btn" onclick={(e) => { e.stopPropagation(); action(e); tooltipVisible = false; }}>{actionLabel}</button>
+            {/if}
+            {#if secondAction}
+                <button class="eat-btn mark-btn" onclick={(e) => { e.stopPropagation(); secondAction(); tooltipVisible = false; }}>{secondActionLabel}</button>
             {/if}
         </div>
     {/if}
@@ -110,6 +114,10 @@
         color: white;
         font-weight: 600;
         cursor: pointer;
+    }
+
+    .mark-btn {
+        background: #2196f3;
     }
 
     img {

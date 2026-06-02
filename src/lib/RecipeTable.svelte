@@ -87,13 +87,6 @@
         <tr>
           <td>{totalIngredients}</td>
           <td
-            onclick={() => {
-              if (marked.includes(name)) {
-                marked = marked.filter((m) => m !== name);
-              } else {
-                marked.push(name);
-              }
-            }}
             class={{
               dish: true,
               highlight: marked.includes(name),
@@ -103,7 +96,7 @@
               big: totalIngredients > owned["total"],
             }}
           >
-            <ImageTooltip action={(e)=>eat(e,name)} actionLabel="Eat" {name} type="meal" />
+            <ImageTooltip action={(e)=>eat(e,name)} actionLabel="Eat" secondAction={() => { if (marked.includes(name)) { marked = marked.filter((m) => m !== name); } else { marked.push(name); } }} secondActionLabel={marked.includes(name) ? 'Unmark' : 'Mark'} {name} type="meal" />
           </td>
           {#each sortedIngredients as ingredient}
             <td

@@ -49,8 +49,10 @@
   <div class="excluded">
     {#each exclude as ingredient}
       <button transition:fly={{ y: 100, x: 100, duration: 1000 }} class="excluded-item"
-          onclick={() => unexclude(ingredient)}>
-        <ImageTooltip name={ingredient} type="ingredient" />
+          onclick={() => unexclude(ingredient)}
+          aria-label="Restore {ingredient}">
+        <img src={`https://www.serebii.net/pokemonsleep/ingredients/${ingredient.toLowerCase().replace(/\s+/g, "")}.png`}
+             alt={ingredient} class="excluded-icon" />
       </button>
     {/each}
   </div>
@@ -105,6 +107,7 @@
     all: unset; cursor: pointer; padding: 0.25rem;
     background: #f8f9fa; border-radius: 15px;
   }
+  .excluded-icon { width: 24px; height: 24px; object-fit: contain; display: block; }
 
   .table-container {
     margin: 1rem 0; border-radius: 12px;
